@@ -90,6 +90,10 @@ RUN rsync -ar /var/www/html/public-npm/ /var/www/html/public/ \
     && rm -rf /var/www/html/public-npm \
     && chown -R www-data:www-data /var/www/html/public
 
+# set up debugging stuff
+COPY xdebug.ini /tmp/xdebug.ini
+RUN cat /tmp/xdebug.ini >> /etc/php/8.1/cli/php.ini && rm /tmp/xdebug.ini
+
 EXPOSE 8080
 
 ENTRYPOINT ["/entrypoint"]
