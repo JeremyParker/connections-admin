@@ -19,3 +19,20 @@ To get the db password:
 -   get a shell on the remote machine with `fly ssh console -a connections-admin-db`
 -   run `env` and look for "OPERATOR_PASSWORD=" and grab the password from there
 -   set up your connection with host = `localhost:15432`, user=`postgres`, password=[the password you just copied].
+
+# how to connect and manage to the local database
+
+You can use the adminer service that's configured in docker-compose to interact with the docker pgsql instance.
+
+-   Open http://localhost:8080/ in your browser.
+-   Select `PostgreSQL` as the "System"
+-   Database should be `database:5432`
+-   username is `root`
+-   password should be `password`
+
+Then you should be able to see all the data and the structure of the db.
+
+# how I set up the deployment (incomplete list of steps)
+
+-   fly launch # select yes to the database option
+-   fly secrets set DB_CONNECTION=pgsql

@@ -37,6 +37,15 @@ services:
             - "5432:5432"
         networks:
             - sail
+        volumes:
+            - "sailpgsql:/var/lib/postgresql/data"
+
+    adminer:
+        image: "adminer"
+        networks:
+            - sail
+        ports:
+            - 8080:8080
 networks:
     sail:
         driver: bridge
