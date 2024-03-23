@@ -20,6 +20,9 @@ To get the db password:
 -   run `env` and look for "OPERATOR_PASSWORD=" and grab the password from there
 -   set up your connection with host = `localhost:15432`, user=`postgres`, password=[the password you just copied].
 
+For some reason the remote db is called `connections-admin`. I think maybe I didn't have the DB_DATABASE set
+when I ran `php artisan migrate`?
+
 # how to connect and manage to the local database
 
 You can use the adminer service that's configured in docker-compose to interact with the docker pgsql instance.
@@ -35,4 +38,6 @@ Then you should be able to see all the data and the structure of the db.
 # how I set up the deployment (incomplete list of steps)
 
 -   fly launch # select yes to the database option
--   fly secrets set DB_CONNECTION=pgsql
+-   `fly secrets set DB_CONNECTION=pgsql`
+-   `fly secrets set DB_DATABASE=words`
+-   get a shell on the remote app container and run `php artisan migrate`
