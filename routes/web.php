@@ -1,9 +1,8 @@
 <?php
 
-use App\Models\Word;
+use App\Models\{Category, Word};
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\WordController;
+use App\Http\Controllers\{UserController, WordController, CategoryController};
 
 /*
 |--------------------------------------------------------------------------
@@ -27,3 +26,11 @@ Route::post('/login', [UserController::class, 'login']);
 
 // Word related functions
 Route::post('/create-word', [WordController::class, 'createWord']);
+
+
+// Category related functions
+Route::get('/categories', function () {
+    $categories = Category::all();
+    return view('categories', ['categories' => $categories]);
+});
+Route::post('/create-category', [CategoryController::class, 'createCategory']);
