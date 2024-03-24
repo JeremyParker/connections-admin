@@ -20,8 +20,8 @@ return new class extends Migration
             $table->foreign('creator')->references('id')->on('users')->onUpdate('cascade')->onDelete('restrict');
             $table->unsignedBigInteger('editor')->nullable();
             $table->foreign('editor')->references('id')->on('users')->onUpdate('cascade')->onDelete('restrict');
-            $table->dateTime('usedTime')->nullable(); // the last date this category was used in a live game
-            $table->dateTime('rejectedTime')->nullable(); // the last time this category was in an auditioned game that was rejected
+            $table->dateTime('used_time')->nullable(); // the last date this category was used in a live game
+            $table->dateTime('rejected_time')->nullable(); // the last time this category was in an auditioned game that was rejected
         });
     }
 
