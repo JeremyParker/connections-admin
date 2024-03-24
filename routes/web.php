@@ -1,7 +1,9 @@
 <?php
 
+use App\Models\Word;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\WordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,9 +17,13 @@ use App\Http\Controllers\UserController;
 */
 
 Route::get('/', function () {
-    return view('home');
+    $words = Word::all();
+    return view('home', ['words' => $words]);
 });
 
 Route::post('/register', [UserController::class, 'register']);
 Route::post('/logout', [UserController::class, 'logout']);
 Route::post('/login', [UserController::class, 'login']);
+
+// Word related functions
+Route::post('/create-word', [WordController::class, 'createWord']);

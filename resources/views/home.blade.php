@@ -10,6 +10,16 @@
             @csrf
             <button>Logout</button>
         </form>
+        <div style="border: 3px solid black;">
+            <h2>add a word</h2>
+            <form action="/create-word" method="POST">
+                @csrf
+                <input type="text" name="text" placeholder="New Word">
+                <label for="isTopical">Is Topical:</label>
+                <input type="checkbox" id="isTopical" name="isTopical" checked>
+                <button>Save</button>
+            </form>
+        </div>
 @else
     <div style="border: 3px solid black;">
         <h2>Register</h2>
@@ -28,5 +38,19 @@
             <button>Log in</button>
         </form>
 @endauth
+        <div style="border: 3px solid black;">
+            <h2>All words</h2>
+            @foreach ($words as $word)
+                <div style="background-color: #CCCCCC; padding: 10px; margin: 10px;">
+                    {{$word['text']}}
+                    {{-- <form action="/delete-word/{{$word->id}}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button>Delete</button>
+                    </form> --}}
+                </div>
+            @endforeach
+
+        </div>
 </body>
 </html>

@@ -42,4 +42,11 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    /**
+     * Get all the words a user has added
+     */
+    public function userWords() {
+        return $this->hasMany(Word::class, 'creator');
+    }
 }
