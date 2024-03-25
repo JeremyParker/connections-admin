@@ -10,15 +10,26 @@ use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\QueryException;
 
-
 class WordController extends Controller
 {
+    public function showWords() {
+        $words = Word::orderBy('updated_at', 'desc')->get();
+        return view('words', ['words' => $words]);
+    }
+
+    public function showEditWord(Word $word) {
+        return view('word', ['word' => $word]);
+    }
+
     public function createWord(Request $request) {
+        $request->merge([
+            'text' => strtolower($request->text),
+        ]);
        $incomingFields = $request->validate([
             'text' => ['required', 'min:3', 'max:30', Rule::unique('words', 'text')],
         ]);
         $newWord = [
-            'text' => strip_tags(Str::lower($incomingFields['text'])),
+            'text' => strip_tags($incomingFields['text']),
             'isTopical' => $request->has('isTopical'),
             'creator' => auth()->id()
         ];
@@ -27,7 +38,34 @@ class WordController extends Controller
             $word = Word::create($newWord);
             DB::commit();
             if ($word) {
-                return redirect('/');
+                return back()->with('success', 'Word saved. Thanks!');
+            }
+        } catch (Exception $e) {
+            \Log::error($e->getMessage());
+        } catch (QueryException $qe) {
+            \Log::error($qe->getMessage());
+        }
+        return back()->withInput()->withErrors('Error: ' . $e->getMessage());
+     }
+
+     public function updateWord(Word $word, Request $request) {
+        $request->merge([
+            'text' => strtolower($request->text),
+        ]);
+       $incomingFields = $request->validate([
+            'text' => ['required', 'min:3', 'max:30', Rule::unique('words', 'text')->ignore($word->id)],
+        ]);
+        $updatedWord = [
+            'text' => strip_tags($incomingFields['text']),
+            'isTopical' => $request->has('isTopical'),
+            'editor' => auth()->id()
+        ];
+        try {
+            DB::beginTransaction();
+            $word->update($updatedWord);
+            DB::commit();
+            if ($word) {
+                return redirect('/words')->with('success', 'Word saved. Thanks!');
             }
         } catch (Exception $e) {
             \Log::error($e->getMessage());

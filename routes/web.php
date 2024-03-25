@@ -16,8 +16,7 @@ use App\Http\Controllers\{UserController, WordController, CategoryController};
 */
 
 Route::get('/', function () {
-    $words = Word::all();
-    return view('home', ['words' => $words]);
+    return view('home', []);
 });
 
 Route::post('/register', [UserController::class, 'register']);
@@ -25,12 +24,15 @@ Route::post('/logout', [UserController::class, 'logout']);
 Route::post('/login', [UserController::class, 'login']);
 
 // Word related functions
-Route::post('/create-word', [WordController::class, 'createWord']);
+Route::get('/words', [WordController::class, 'showWords']);
+Route::get('/word/{word}', [WordController::class, 'showEditWord']);
 
+Route::post('/words', [WordController::class, 'createWord']);
+Route::put('/word/{word}',[WordController::class, 'updateWord']);
 
 // Category related functions
-Route::get('/categories', function () {
-    $categories = Category::all();
-    return view('categories', ['categories' => $categories]);
-});
-Route::post('/create-category', [CategoryController::class, 'createCategory']);
+Route::get('/categories', [CategoryController::class, 'showCategories']);
+Route::post('/categories', [CategoryController::class, 'createCategory']);
+
+Route::get('/category/{category}', [CategoryController::class, 'showEditCategory']);
+Route::put('/category/{category}',[CategoryController::class, 'updateCategory']);

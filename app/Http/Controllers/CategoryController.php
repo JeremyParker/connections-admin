@@ -14,8 +14,11 @@ use Illuminate\Database\QueryException;
 class CategoryController extends Controller
 {
     public function createCategory(Request $request) {
+        $request->merge([
+            'name' => strtolower($request->name),
+        ]);
        $incomingFields = $request->validate([
-            'name' => ['required', 'min:2', 'max:256', Rule::unique('words', 'text')],
+            'name' => ['required', 'min:2', 'max:256', Rule::unique('categories', 'name')],
             'notes' => [],
         ]);
         $newCategory = [
@@ -28,13 +31,38 @@ class CategoryController extends Controller
             $category = Category::create($newCategory);
             DB::commit();
             if ($category) {
-                return redirect('/categories');
+                return back()->with('success', 'Category saved. Thanks!');
             }
         } catch (Exception $e) {
             \Log::error($e->getMessage());
         } catch (QueryException $qe) {
             \Log::error($qe->getMessage());
         }
-        return back()->withInput()->withErrors('Error: ' . $e->getMessage());
-     }
+        return back()->withInput()->withErrors('Error. See logs');
+    }
+
+    public function showCategories() {
+        $categories = Category::orderBy('updated_at', 'desc')->get();
+        return view('categories', ['categories' => $categories]);
+    }
+
+    public function showEditCategory(Category $category) {
+        return view('category', ['category' => $category]);
+    }
+
+    public function updateCategory(Category $category, Request $request) {
+        $request->merge([
+            'name' => strtolower($request->name),
+        ]);
+        $incomingFields = $request->validate([
+            'name' => ['required', 'min:2', 'max:256', Rule::unique('categories', 'name')->ignore($category->id)],
+            'notes' => [],
+        ]);
+
+        $incomingFields['name'] = strip_tags($incomingFields['name']);
+        $incomingFields['notes'] = strip_tags($incomingFields['notes']);
+
+        $category->update($incomingFields);
+        return redirect('/categories')->with('success', 'Category saved. Thanks!');;
+    }
 }
