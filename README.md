@@ -23,6 +23,10 @@ To get the db password:
 For some reason the remote db is called `connections-admin`. I think maybe I didn't have the DB_DATABASE set
 when I ran `php artisan migrate`?
 
+# how to run locally
+Run `sail up`
+Open a browser to localhost
+
 # how to connect and manage to the local database
 
 You can use the adminer service that's configured in docker-compose to interact with the docker pgsql instance.
