@@ -28,11 +28,11 @@ Route::get('/words', [WordController::class, 'showWords']);
 Route::get('/word/{word}', [WordController::class, 'showEditWord']);
 
 Route::post('/words', [WordController::class, 'createWord']);
-Route::put('/word/{word}',[WordController::class, 'updateWord']);
+Route::put('/word/{word}', [WordController::class, 'updateWord']);
 
 // Category related functions
 Route::get('/categories', [CategoryController::class, 'showCategories']);
 Route::post('/categories', [CategoryController::class, 'createCategory']);
 
 Route::get('/category/{category}', [CategoryController::class, 'showEditCategory']);
-Route::put('/category/{category}',[CategoryController::class, 'updateCategory']);
+Route::put('/category/{category}', [CategoryController::class, 'updateCategory']);
