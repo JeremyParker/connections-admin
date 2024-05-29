@@ -1,26 +1,4 @@
-@auth
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Words</title>
-</head>
-<body>
-    @if(session('success'))
-        <div style="background-color: lightgreen;">
-            {{ session('success') }}
-        </div>
-    @endif
-    @if(session('error'))
-        <div style="background-color: lightgreen;">
-            {{ session('error') }}
-        </div>
-    @endif
-    <a href='/'><button>Home</button></a>
-    <form action="/logout" method="POST">
-        @csrf
-        <button>Logout</button>
-    </form>
+<x-layout>
     <div style="border: 3px solid black;">
         <h2>add a word</h2>
         <form action="/words" method="POST">
@@ -45,10 +23,4 @@
             </div>
         @endforeach
     </div>
-</body>
-</html>
-@else
-    <script type="text/javascript">
-        window.location = "/";
-    </script>
-@endauth
+</x-layout>

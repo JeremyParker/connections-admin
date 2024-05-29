@@ -1,21 +1,4 @@
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Edit Word</title>
-</head>
-<body>
-    @if($errors->any())
-        <div style="background-color: lightpink; color: black; padding: 10px; margin-bottom: 20px;">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
-
+<x-layout>
   <h1>Edit Word</h1>
   <form action="/word/{{$word->id}}" method="POST">
     @csrf
@@ -25,5 +8,10 @@
     <input type="checkbox" id="isTopical" name="isTopical" {{ $word->isTopical ? "checked" : "" }}>
     <button>Save</button>
   </form>
-</body>
-</html>
+
+  <form action="/word/{{$word->id}}/category_word" method="POST">
+     <livewire:categories-combobox name="category" label="Add A Category" placeholder="Type a category">
+    <button>Add a category</button>
+  </form>
+  @livewireScripts
+</x-layout>

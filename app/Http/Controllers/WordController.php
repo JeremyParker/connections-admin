@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Exception;
 use App\Models\Word;
-use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
@@ -12,22 +11,25 @@ use Illuminate\Database\QueryException;
 
 class WordController extends Controller
 {
-    public function showWords() {
+    public function showWords()
+    {
         $words = Word::orderBy('updated_at', 'desc')->get();
         return view('words', ['words' => $words]);
     }
 
-    public function showEditWord(Word $word) {
+    public function showEditWord(Word $word)
+    {
         return view('word', ['word' => $word]);
     }
 
-    public function createWord(Request $request) {
+    public function createWord(Request $request)
+    {
         $request->merge([
             'text' => strtolower($request->text),
         ]);
-       $incomingFields = $request->validate([
-            'text' => ['required', 'min:3', 'max:30', Rule::unique('words', 'text')],
-        ]);
+        $incomingFields = $request->validate([
+             'text' => ['required', 'min:3', 'max:30', Rule::unique('words', 'text')],
+         ]);
         $newWord = [
             'text' => strip_tags($incomingFields['text']),
             'isTopical' => $request->has('isTopical'),
@@ -46,15 +48,16 @@ class WordController extends Controller
             \Log::error($qe->getMessage());
         }
         return back()->withInput()->withErrors('Error: ' . $e->getMessage());
-     }
+    }
 
-     public function updateWord(Word $word, Request $request) {
+    public function updateWord(Word $word, Request $request)
+    {
         $request->merge([
             'text' => strtolower($request->text),
         ]);
-       $incomingFields = $request->validate([
-            'text' => ['required', 'min:3', 'max:30', Rule::unique('words', 'text')->ignore($word->id)],
-        ]);
+        $incomingFields = $request->validate([
+             'text' => ['required', 'min:3', 'max:30', Rule::unique('words', 'text')->ignore($word->id)],
+         ]);
         $updatedWord = [
             'text' => strip_tags($incomingFields['text']),
             'isTopical' => $request->has('isTopical'),
@@ -73,5 +76,5 @@ class WordController extends Controller
             \Log::error($qe->getMessage());
         }
         return back()->withInput()->withErrors('Error: ' . $e->getMessage());
-     }
+    }
 }
