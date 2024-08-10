@@ -24,7 +24,7 @@ Route::post('/logout', [UserController::class, 'logout']);
 Route::post('/login', [UserController::class, 'login']);
 
 // Word related functions
-Route::get('/words', [WordController::class, 'showWords']);
+Route::get('/words', [WordController::class, 'showWords'])->name('words.index');
 Route::get('/word/{word}', [WordController::class, 'showEditWord']);
 
 Route::post('/words', [WordController::class, 'createWord']);
