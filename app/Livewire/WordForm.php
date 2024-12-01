@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use App\Models\Word;
 use Livewire\Component;
+use Illuminate\Support\Facades\Log;
 
 class WordForm extends Component
 {
@@ -15,7 +16,7 @@ class WordForm extends Component
 
     public function mount(Word $word)
     {
-        \Log::info($word);
+        Log::info($word);
         $this->word = $word;
         $this->fill($word->only('text', 'isTopical'));
     }
@@ -27,7 +28,7 @@ class WordForm extends Component
 
     public function saveWord()
     {
-        \Log::info("saving " . $this->text);
+        Log::info("saving " . $this->text);
         $this->validate([
             'text' => 'required|min:3',
         ]);
