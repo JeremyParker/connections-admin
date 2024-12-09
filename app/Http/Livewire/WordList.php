@@ -9,6 +9,7 @@ class WordList extends Component
 {
     public $words;
     public $search = '';
+    public bool $isTopical;
     public function render()
     {
         $this->words = Word::where('text', 'like', '%' . $this->search . '%')->orderBy('updated_at', 'desc')->get();
