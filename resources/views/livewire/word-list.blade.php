@@ -1,6 +1,6 @@
 <div>
     <form action="{{ route('words.create') }}" method="POST">
-        <input type="text" name="name" placeholder="Search or add new word" wire:model.live="search"
+        <input type="text" name="text" placeholder="Search or add new word" wire:model.live="search"
             style="margin-bottom: 15px; padding: 5px; width: 100%;" />
 
         @forelse ($words as $word)
@@ -11,7 +11,14 @@
             </a>
         @empty
             @csrf
-            <button type="submit">Add new word</button>
+            <div>
+                <label for="isTopical">{{ env('TOPICAL_WORDING', 'is on-topic') }}:</label>
+                <input type="checkbox" id="isTopical" name="isTopical" wire:model="isTopical"
+                    value="{{ $isTopical }}">
+            </div>
+            <div>
+                <button type="submit">Add new word</button>
+            </div>
         @endforelse
     </form>
     <div wire:loading>
