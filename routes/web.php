@@ -26,9 +26,11 @@ Route::post('/login', [UserController::class, 'login']);
 // Word related functions
 Route::get('/words', [WordController::class, 'showWords'])->name('words.index');
 Route::get('/word/{word}', [WordController::class, 'showEditWord']);
+Route::get('/word/{word}/categories/create', [WordController::class, 'showAddToCategory']);
 
 Route::post('/words', [WordController::class, 'createWord'])->name('words.create');
 Route::put('/word/{word}', [WordController::class, 'updateWord']);
+
 
 // Category related functions
 Route::get('/categories', [CategoryController::class, 'showCategories']);
