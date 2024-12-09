@@ -44,8 +44,7 @@ class CategoryController extends Controller
 
     public function showCategories()
     {
-        $categories = Category::orderBy('updated_at', 'desc')->get();
-        return view('categories', ['categories' => $categories]);
+        return view('categories');
     }
 
     public function showEditCategory(Category $category)

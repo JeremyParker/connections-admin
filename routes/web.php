@@ -32,7 +32,7 @@ Route::put('/word/{word}', [WordController::class, 'updateWord']);
 
 // Category related functions
 Route::get('/categories', [CategoryController::class, 'showCategories']);
-Route::post('/categories', [CategoryController::class, 'createCategory']);
+Route::post('/categories', [CategoryController::class, 'createCategory'])->name('categories.create');
 
 Route::get('/category/{category}', [CategoryController::class, 'showEditCategory']);
 Route::put('/category/{category}', [CategoryController::class, 'updateCategory']);
