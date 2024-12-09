@@ -27,7 +27,7 @@ Route::post('/login', [UserController::class, 'login']);
 Route::get('/words', [WordController::class, 'showWords'])->name('words.index');
 Route::get('/word/{word}', [WordController::class, 'showEditWord']);
 
-Route::post('/words', [WordController::class, 'createWord']);
+Route::post('/words', [WordController::class, 'createWord'])->name('words.create');
 Route::put('/word/{word}', [WordController::class, 'updateWord']);
 
 // Category related functions
