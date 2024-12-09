@@ -12,7 +12,10 @@ class WordList extends Component
     public bool $isTopical;
     public function render()
     {
-        $this->words = Word::where('text', 'like', '%' . $this->search . '%')->orderBy('updated_at', 'desc')->get();
+        $this->words = Word::whereRaw('LOWER(text) LIKE ?', ['%' . strtolower($this->search) . '%'])
+            ->orderBy('updated_at', 'desc')
+            ->get();
+
         return view('livewire.word-list', ['words' => $this->words]);
     }
 }

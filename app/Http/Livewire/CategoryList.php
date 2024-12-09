@@ -12,7 +12,9 @@ class CategoryList extends Component
 
     public function render()
     {
-        $this->categories = Category::where('name', 'like', '%' . $this->search . '%')->orderBy('updated_at', 'desc')->get();
+        $this->categories = Category::whereRaw('LOWER(name) LIKE ?', ['%' . strtolower($this->search) . '%'])
+            ->orderBy('updated_at', 'desc')
+            ->get();
         return view('livewire.category-list', ['categories' => $this->categories]);
     }
 }
