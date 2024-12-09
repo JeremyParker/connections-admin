@@ -30,6 +30,7 @@
         </form>
     </nav>
     {{ $slot }}
+    @livewireScripts
     </body>
 </html>
 @else
@@ -56,6 +57,7 @@
             <input name="loginpassword" type="password" placeholder="password">
             <button>Log in</button>
         </form>
+        @livewireScripts
     </body>
     </html>
 @endauth

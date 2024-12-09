@@ -24,6 +24,7 @@ For some reason the remote db is called `connections-admin`. I think maybe I did
 when I ran `php artisan migrate`?
 
 # how to run locally
+
 Run `sail up`
 Open a browser to localhost
 
@@ -33,7 +34,7 @@ You can use the adminer service that's configured in docker-compose to interact 
 
 -   Open http://localhost:8080/ in your browser.
 -   Select `PostgreSQL` as the "System"
--   Database should be `database:5432`
+-   Server should be `database:5432`
 -   username is `root`
 -   password should be `password`
 
@@ -45,3 +46,14 @@ Then you should be able to see all the data and the structure of the db.
 -   `fly secrets set DB_CONNECTION=pgsql`
 -   `fly secrets set DB_DATABASE=words`
 -   get a shell on the remote app container and run `php artisan migrate`
+
+# how to clear caches
+
+Sometimes the app gets confused, and you need to clear the caches. Execute these commands:
+
+```
+php artisan config:clear
+php artisan cache:clear
+php artisan view:clear
+php artisan route:clear
+```

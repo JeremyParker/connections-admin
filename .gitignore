@@ -3,8 +3,10 @@
 /public/build
 /public/hot
 /public/storage
+/public/vendor
 /storage/*.key
 /vendor
+/resources/views/vendor/livewire/*
 .env
 .env.backup
 .env.production
