@@ -8,10 +8,9 @@ use Illuminate\Support\Facades\Log;
 
 class WordForm extends Component
 {
+    public $layout = 'components.layouts.app';
     public Word $word;
-
     public String $text;
-
     public bool $isTopical;
 
     public function mount(Word $word)

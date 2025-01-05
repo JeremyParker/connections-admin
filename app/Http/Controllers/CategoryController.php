@@ -42,11 +42,6 @@ class CategoryController extends Controller
         return back()->withInput()->withErrors('Error. See logs');
     }
 
-    public function showCategories()
-    {
-        return view('categories');
-    }
-
     public function showEditCategory(Category $category)
     {
         return view('category', ['category' => $category]);
