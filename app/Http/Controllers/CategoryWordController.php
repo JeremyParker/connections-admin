@@ -19,7 +19,7 @@ class CategoryWordController extends Controller
 
         $word = Word::findOrFail($wordId);
         $category = Category::findOrFail($categoryId);
-        return view('categoryword.create', [
+        return view('category_word.create', [
             'word' => $word,
             'category' => $category,
             'returnTo' => $returnTo,
