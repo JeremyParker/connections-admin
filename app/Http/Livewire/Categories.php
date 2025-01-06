@@ -9,10 +9,6 @@ class Categories extends Component
 {
     public $layout = 'components.layouts.app';
 
-    public function mount()
-    {
-    }
-
     public function render()
     {
         return view('livewire.categories');
