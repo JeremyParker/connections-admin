@@ -1,6 +1,6 @@
 <x-layouts.app>
     <h1>Edit Category</h1>
-    <form action="/category/{{ $category->id }}" method="POST">
+    <form action="{{ route('updateCategory', $category->id) }}" method="POST">
         @csrf
         @method('PUT')
         <input type="text" name="name" placeholder="New Category" value="{{ $category->name }}">

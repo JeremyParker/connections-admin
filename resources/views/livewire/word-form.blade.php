@@ -15,8 +15,7 @@
         <span wire:loading>Saving...</span>
     </form>
 
-    <a href={{ route('showAddToCategory', $word->id) }}><button>Add to a category</button></a>
-
     {{-- TODO: list of categories component --}}
 
+    <a href={{ route('showAddToCategory', $word->id) }}><button>Add to another category</button></a>
 </div>
