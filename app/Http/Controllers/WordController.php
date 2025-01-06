@@ -7,14 +7,14 @@ use App\Models\Word;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Database\QueryException;
 
 class WordController extends Controller
 {
     public function showWords()
     {
-        $words = Word::orderBy('updated_at', 'desc')->get();
-        return view('words', ['words' => $words]);
+        return view('words');
     }
 
     public function showEditWord(Word $word)
@@ -43,9 +43,9 @@ class WordController extends Controller
                 return back()->with('success', 'Word saved. Thanks!');
             }
         } catch (Exception $e) {
-            \Log::error($e->getMessage());
+            Log::error($e->getMessage());
         } catch (QueryException $qe) {
-            \Log::error($qe->getMessage());
+            Log::error($qe->getMessage());
         }
         return back()->withInput()->withErrors('Error: ' . $e->getMessage());
     }
@@ -71,9 +71,9 @@ class WordController extends Controller
                 return redirect('/words')->with('success', 'Word saved. Thanks!');
             }
         } catch (Exception $e) {
-            \Log::error($e->getMessage());
+            Log::error($e->getMessage());
         } catch (QueryException $qe) {
-            \Log::error($qe->getMessage());
+            Log::error($qe->getMessage());
         }
         return back()->withInput()->withErrors('Error: ' . $e->getMessage());
     }

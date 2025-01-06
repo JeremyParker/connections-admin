@@ -57,3 +57,6 @@ php artisan cache:clear
 php artisan view:clear
 php artisan route:clear
 ```
+
+To check the phpinfo for debugging, go to http://localhost/phpinfo-secret.php
+TODO: this is a security issue.

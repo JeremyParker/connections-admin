@@ -7,6 +7,7 @@ use App\Models\Word;
 
 class WordList extends Component
 {
+    public $layout = 'components.layouts.app';
     public $words;
     public $search = '';
     public bool $isTopical;

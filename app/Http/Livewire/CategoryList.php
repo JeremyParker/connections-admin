@@ -7,14 +7,20 @@ use App\Models\Category;
 
 class CategoryList extends Component
 {
-    public $categories;
+    public $layout = 'components.layouts.app';
+
     public $search = '';
 
     public function render()
     {
-        $this->categories = Category::whereRaw('LOWER(name) LIKE ?', ['%' . strtolower($this->search) . '%'])
+        $categories = Category::whereRaw('LOWER(name) LIKE ?', ['%' . strtolower($this->search) . '%'])
             ->orderBy('updated_at', 'desc')
             ->get();
-        return view('livewire.category-list', ['categories' => $this->categories]);
+        return view('livewire.category-list', ['categories' => $categories]);
+    }
+
+    public function onSelected($categoryId)
+    {
+        $this->dispatch('categorySelected', categoryId: $categoryId);
     }
 }
