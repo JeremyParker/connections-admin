@@ -7,8 +7,22 @@
             <a href="#" wire:click.prevent="onSelected({{ $category->id }})"
                 style="text-decoration: none; color: inherit;">
                 <div style="background-color: #CCCCCC; padding: 10px; margin: 10px;">
-                    <h3>{{ $category['name'] }}</h3>
-                    <div style="font-size: smaller;">{{ $category['notes'] }}</div>
+                    <h4>{{ strtoupper($category['name']) }}</h4>
+                    @if (!empty($category['notes']))
+                        <div style="font-size: smaller;">({{ $category['notes'] }})</div>
+                    @endif
+                    <hr>
+                    <div>
+                        @forelse ($category->words as $word)
+                            <span style="background-color: #FFFFFF; padding: 5px; margin: 5px;">
+                                {{ strtoupper($word['text']) }}
+                            </span>
+                        @empty
+                            <span style="background-color: #DD4444; padding: 5px; margin: 5px;">
+                                [NO WORDS IN THIS CATEGORY YET]
+                            </span>
+                        @endforelse
+                    </div>
                 </div>
             </a>
         @empty

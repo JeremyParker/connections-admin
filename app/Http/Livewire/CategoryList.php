@@ -16,6 +16,7 @@ class CategoryList extends Component
         $categories = Category::whereRaw('LOWER(name) LIKE ?', ['%' . strtolower($this->search) . '%'])
             ->orderBy('updated_at', 'desc')
             ->get();
+            $categories->load('words');
         return view('livewire.category-list', ['categories' => $categories]);
     }
 
