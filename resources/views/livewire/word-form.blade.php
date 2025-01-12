@@ -19,7 +19,7 @@
         Categories this word is in:
         <hr>
         @forelse ($word->categories as $category)
-            <a href="{{ route('showEditCategory', $category->id) }}" style="text-decoration: none;">
+            <a href="{{ route('category.edit', $category->id) }}" style="text-decoration: none;">
                 {{-- TODO: background color based on difficulty --}}
                 <div style="background-color: #BBBBBB; padding: 5px; margin: 5px;">
                     {{ strtoupper($category['name']) }}

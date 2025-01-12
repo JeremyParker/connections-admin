@@ -17,6 +17,6 @@ class Categories extends Component
     #[On('categorySelected')]
     public function categorySelected($categoryId)
     {
-        return redirect()->to(route('showEditCategory', ['category' => $categoryId]));
+        return redirect()->to(route('category.edit', ['category' => $categoryId]));
     }
 }

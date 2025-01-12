@@ -44,6 +44,7 @@ class CategoryController extends Controller
 
     public function showEditCategory(Category $category)
     {
+        $category->load('words');
         return view('category', ['category' => $category]);
     }
 

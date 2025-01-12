@@ -17,6 +17,6 @@ class Words extends Component
     #[On('wordSelected')]
     public function wordSelected($wordId)
     {
-        return redirect()->to(route('showEditWord', ['word' => $wordId]));
+        return redirect()->to(route('word.edit', ['word' => $wordId]));
     }
 }

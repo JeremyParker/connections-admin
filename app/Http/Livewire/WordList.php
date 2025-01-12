@@ -19,4 +19,9 @@ class WordList extends Component
 
         return view('livewire.word-list', ['words' => $this->words]);
     }
+
+    public function onSelected($wordId)
+    {
+        $this->dispatch('wordSelected', wordId: $wordId);
+    }
 }

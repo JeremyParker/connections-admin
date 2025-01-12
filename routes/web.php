@@ -26,11 +26,11 @@ Route::post('/register', [UserController::class, 'register']);
 Route::post('/logout', [UserController::class, 'logout']);
 Route::post('/login', [UserController::class, 'login']);
 
-// Word related functions
+// Word related routes
 Route::get('/words', Words::class)->name('words.index');
-Route::get('/word/{word}', [WordController::class, 'showEditWord'])->name('showEditWord');
 Route::post('/words', [WordController::class, 'createWord'])->name('words.create');
-Route::put('/word/{word}', [WordController::class, 'updateWord']);
+Route::get('/word/{word}', [WordController::class, 'showEditWord'])->name('word.edit');
+
 
 // adding a word to a category
 Route::get('/word/{word}/categories', AddWordToCategory::class)->name('showAddToCategory'); // TODO: rename choose category for word
@@ -38,12 +38,15 @@ Route::get('/word/{word}/categories', AddWordToCategory::class)->name('showAddTo
 // adding a category to a word
 Route::get('/category/{category}/words', ChooseWordForCategory::class)->name('chooseWordForCategory');
 
+Route::get('category{category}/word/{word}', [CategoryWordController::class, 'showEdit'])->name('category_word.edit');
+Route::put('category/{category}/word/{word}', [CategoryWordController::class, 'update'])->name('category_word.update');
+
+// CategoryWord related routes
 Route::get('category_word/create', [CategoryWordController::class, 'showCreate'])->name('category_word.create');
 Route::post('category_word', [CategoryWordController::class, 'store'])->name('category_word.store');
 
-// Category related functions
+// Category related routes
 Route::get('/categories', Categories::class)->name('categories.index');
 Route::post('/categories', [CategoryController::class, 'createCategory'])->name('categories.create');
-
-Route::get('/category/{category}', [CategoryController::class, 'showEditCategory'])->name('showEditCategory');
+Route::get('/category/{category}', [CategoryController::class, 'showEditCategory'])->name('category.edit');
 Route::put('/category/{category}', [CategoryController::class, 'updateCategory'])->name('updateCategory');
