@@ -4,7 +4,8 @@
             style="margin-bottom: 15px; padding: 5px; width: 100%;" />
 
         @forelse ($words as $word)
-            <a href="/word/{{ $word->id }}" style="text-decoration: none; color: inherit;">
+            <a href="#" wire:click.prevent="onSelected({{ $word->id }})"
+                style="text-decoration: none; color: inherit;">
                 <div style="background-color: #CCCCCC; padding: 10px; margin: 10px; cursor: pointer;">
                     {{ $word['text'] }}
                 </div>
