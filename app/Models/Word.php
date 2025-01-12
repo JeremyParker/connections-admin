@@ -14,4 +14,14 @@ class Word extends Model
         'isTopical',
         'creator',
     ];
+
+    /**
+     * The categories that belong to the word.
+     */
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class, 'category_word', 'word_id', 'category_id')
+                    ->withPivot('difficulty_override', 'example_sentence', 'used_time', 'rejected_time')
+                    ->withTimestamps();
+    }
 }

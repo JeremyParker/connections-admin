@@ -4,6 +4,7 @@ use App\Models\{Category, Word};
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{UserController, WordController, CategoryController};
 use App\Http\Livewire\AddWordToCategory; // TODO: rename choose category for word
+use App\Http\Livewire\ChooseWordForCategory;
 use App\Http\Controllers\CategoryWordController;
 use App\Http\Livewire\Categories;
 
@@ -34,6 +35,9 @@ Route::put('/word/{word}', [WordController::class, 'updateWord']);
 
 // adding a word to a category
 Route::get('/word/{word}/categories', AddWordToCategory::class)->name('showAddToCategory'); // TODO: rename choose category for word
+
+// adding a category to a word
+Route::get('/category/{category}/words', ChooseWordForCategory::class)->name('chooseWordForCategory');
 
 Route::get('category_word/create', [CategoryWordController::class, 'showCreate'])->name('category_word.create');
 Route::post('category_word', [CategoryWordController::class, 'store'])->name('category_word.store');

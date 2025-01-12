@@ -15,7 +15,22 @@
         <span wire:loading>Saving...</span>
     </form>
 
-    {{-- TODO: list of categories component --}}
+    <div>
+        Categories this word is in:
+        <hr>
+        @forelse ($word->categories as $category)
+            <a href="{{ route('showEditCategory', $category->id) }}" style="text-decoration: none;">
+                {{-- TODO: background color based on difficulty --}}
+                <div style="background-color: #BBBBBB; padding: 5px; margin: 5px;">
+                    {{ strtoupper($category['name']) }}
+                </div>
+            </a>
+        @empty
+            <div style="background-color: #cfa26b; padding: 5px; margin: 5px;">
+                [THIS WORD IS IN NO CATEGORIES]
+            </div>
+        @endforelse
+    </div>
 
     <a href={{ route('showAddToCategory', $word->id) }}><button>Add to another category</button></a>
 </div>
