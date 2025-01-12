@@ -24,9 +24,4 @@ class Word extends Model
                     ->withPivot('difficulty_override', 'example_sentence', 'used_time', 'rejected_time')
                     ->withTimestamps();
     }
-
-    public function categoryWords()
-    {
-        return $this->hasMany(CategoryWord::class);
-    }
 }
