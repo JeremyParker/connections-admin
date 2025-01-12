@@ -12,11 +12,6 @@ use Illuminate\Database\QueryException;
 
 class WordController extends Controller
 {
-    public function showWords()
-    {
-        return view('words');
-    }
-
     public function showEditWord(Word $word)
     {
         return view('word', ['word' => $word]);

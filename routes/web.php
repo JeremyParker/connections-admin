@@ -1,12 +1,11 @@
 <?php
 
-use App\Models\{Category, Word};
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{UserController, WordController, CategoryController};
 use App\Http\Livewire\AddWordToCategory; // TODO: rename choose category for word
 use App\Http\Livewire\ChooseWordForCategory;
 use App\Http\Controllers\CategoryWordController;
-use App\Http\Livewire\Categories;
+use App\Http\Livewire\{Categories, Words};
 
 /*
 |--------------------------------------------------------------------------
@@ -28,7 +27,7 @@ Route::post('/logout', [UserController::class, 'logout']);
 Route::post('/login', [UserController::class, 'login']);
 
 // Word related functions
-Route::get('/words', [WordController::class, 'showWords'])->name('words.index');
+Route::get('/words', Words::class)->name('words.index');
 Route::get('/word/{word}', [WordController::class, 'showEditWord'])->name('showEditWord');
 Route::post('/words', [WordController::class, 'createWord'])->name('words.create');
 Route::put('/word/{word}', [WordController::class, 'updateWord']);
