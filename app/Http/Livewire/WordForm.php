@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use App\Models\Word;
 use Livewire\Component;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Database\Eloquent\Collection;
 
 class WordForm extends Component
 {
@@ -12,11 +13,12 @@ class WordForm extends Component
     public Word $word;
     public String $text;
     public bool $isTopical;
+    public Collection $categories;
 
     public function mount(Word $word)
     {
-        Log::info($word);
-        $this->word = $word;
+        $this->word = $word->load('categories'); // Eager load the categories relationship
+        $this->categories = $this->word->categories;
         $this->fill($word->only('text', 'isTopical'));
     }
 
